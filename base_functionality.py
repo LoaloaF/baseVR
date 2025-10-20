@@ -1,6 +1,6 @@
 import platform
-import sys
 import os
+import sys
 
 def device_paths(raise_if_nas_missing=True):
     which_os = platform.system()
@@ -29,10 +29,12 @@ def device_paths(raise_if_nas_missing=True):
             local_data_dir = "/Users/yaohaotian/Downloads/Study/BME/Research/MasterThesis/code/data/analysisVR_cache"
             project_dir = "/Users/yaohaotian/Downloads/Study/BME/Research/MasterThesis/code/"
         else:
-            raise ValueError("Unknown MacOS user")
+            raise ValueError("Unknown MacOS user. Edit base_functionality.py in "
+                             "baseVR repo to add user-specific paths.")
     
     else:
-        raise ValueError("Unknown OS or user")
+        raise ValueError("Unknown user. Edit base_functionality.py in "
+                         "baseVR repo to add user-specific paths.")
     
     if not os.path.exists(nas_dir) or os.listdir(nas_dir) == []:
         msg = f"NAS directory not found: {nas_dir} - VPN connected?"
@@ -40,3 +42,17 @@ def device_paths(raise_if_nas_missing=True):
         if raise_if_nas_missing:
             raise FileNotFoundError(msg)
     return nas_dir, local_data_dir, project_dir
+
+def init_import_paths():
+    _, _, project_dir = device_paths()
+    paths = (project_dir,
+             os.path.join(project_dir, 'ephysVR'),
+             os.path.join(project_dir, 'baseVR'),
+             os.path.join(project_dir, 'analysisVR'))
+    
+    for p in paths:
+        if not os.path.exists(p):
+            raise FileNotFoundError(f"Missing repository: {os.path.basename(p)}. Add to project root dir.")
+        if p not in sys.path:
+            sys.path.append(p)
+            
