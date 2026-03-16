@@ -23,6 +23,11 @@ def device_paths(raise_if_nas_missing=True):
         local_data_dir = "/home/simon/local_data/"
         project_dir = "/home/simon/VirtualReality/"
 
+    elif which_os == 'Linux' and user == 'samed':
+        nas_dir = "/BMI/VirtualReality/SpatialSequenceLearning/"
+        local_data_dir = "/home/samed/local_data/"
+        project_dir = "/home/samed/VirtualReality/"
+
     
     elif which_os == "Darwin" and user == "root":
         nas_dir = "/Volumes/large/BMI/VirtualReality/SpatialSequenceLearning/"
