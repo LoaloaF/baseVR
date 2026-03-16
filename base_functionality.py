@@ -28,9 +28,11 @@ def device_paths(raise_if_nas_missing=True):
         elif "yaohaotian" in folders:
             local_data_dir = "/Users/yaohaotian/Downloads/Study/BME/Research/MasterThesis/code/data/analysisVR_cache"
             project_dir = "/Users/yaohaotian/Downloads/Study/BME/Research/MasterThesis/code/"
+        elif "Sam" in folders:
+            local_data_dir = "/Users/sam/eth_master/local_data/analysisVR_cache"
+            project_dir = "/Users/sam/eth_master/VirtualReality/"
         else:
-            raise ValueError("Unknown MacOS user. Edit base_functionality.py in "
-                             "baseVR repo to add user-specific paths.")
+            raise ValueError(f"Unknown user OS: {which_os}, User: {user}")
     
     else:
         raise ValueError("Unknown user. Edit base_functionality.py in "
