@@ -18,6 +18,12 @@ def device_paths(raise_if_nas_missing=True):
         local_data_dir = "/home/vrmaster/local_data/"
         project_dir = "/home/vrmaster/Projects/VirtualReality/"
     
+    elif which_os == 'Linux' and user == 'simon':
+        nas_dir = "/BMI/VirtualReality/SpatialSequenceLearning/"
+        local_data_dir = "/home/simon/local_data/"
+        project_dir = "/home/simon/VirtualReality/"
+
+    
     elif which_os == "Darwin" and user == "root":
         nas_dir = "/Volumes/large/BMI/VirtualReality/SpatialSequenceLearning/"
         folders = [f for f in os.listdir("/Users") if os.path.isdir(os.path.join("/Users", f))]
@@ -52,7 +58,7 @@ def init_import_paths():
     
     for p in paths:
         if not os.path.exists(p):
-            raise FileNotFoundError(f"Missing repository: {os.path.basename(p)}. Add to project root dir.")
+            print(f"Warning: missing repository: {os.path.basename(p)}. Add to project root dir.")
         if p not in sys.path:
             sys.path.append(p)
             
